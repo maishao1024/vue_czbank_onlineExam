@@ -93,7 +93,7 @@ export default {
     }
   },
   created() {
-    this.userName = localStorage.username;
+    this.userName = sessionStorage.jobNo;
   }
 }
 </script>

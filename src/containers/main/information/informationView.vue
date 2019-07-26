@@ -1,34 +1,34 @@
 <template lang="html">
   <div class="changePass">
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="工号" prop="oldPass">
+      <el-form-item label="工号" prop="jobNo"><span style="color:red;">* </span>
         <el-col :span="10">
-        <el-input type="password" v-model="ruleForm.jobNo" auto-complete="off" clearable></el-input>
+        <el-input  v-model="ruleForm.jobNo" clearable></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="姓名" prop="pass">
+      <el-form-item label="姓名" prop="username"><span style="color:red;">* </span>
         <el-col :span="10">
-        <el-input type="password" v-model="ruleForm.name" auto-complete="off" clearable></el-input>
+        <el-input v-model="ruleForm.username" auto-complete="off" clearable></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="电话">
+      <el-form-item label="电话" prop="phone">
         <el-col :span="10">
-        <el-input type="password" v-model="ruleForm.phone" auto-complete="off" clearable></el-input>
+          <el-input v-model="ruleForm.phone" auto-complete="off"></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="邮箱">
+      <el-form-item label="邮箱" prop="email">
         <el-col :span="10">
-        <el-input type="password" v-model="ruleForm.email" auto-complete="off" clearable></el-input>
+          <el-input v-model="ruleForm.email" auto-complete="off"></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="微信号">
+      <el-form-item label="微信号" prop="wxNo">
         <el-col :span="10">
-        <el-input type="password" v-model="ruleForm.wxNo" auto-complete="off" clearable></el-input>
+          <el-input v-model="ruleForm.wxNo" auto-complete="off"></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="部门">
+      <el-form-item label="部门" prop="department">
         <el-col :span="10">
-        <el-input type="password" v-model="ruleForm.department" auto-complete="off" clearable></el-input>
+          <el-input v-model="ruleForm.department" auto-complete="off"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item>
@@ -40,9 +40,9 @@
 </template>
 
 <script>
-import httpServer from '@/components/httpServer/httpServer.js'
+  import httpServer from '@/components/httpServer/httpServer.js'
 
-export default {
+  export default {
     data() {
       var checkOldPass = (rule, value, callback) => {
         if (value === '') {
@@ -56,60 +56,55 @@ export default {
         if (value === '') {
           callback(new Error('请输入姓名'));
         } else {
-          if (this.ruleForm.checkPass !== '') {
-            this.$refs.ruleForm.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.ruleForm.pass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
           callback();
         }
       };
       return {
         ruleForm: {
-          pass: '',
-          checkPass: '',
-          oldPass: ''
+          jobNo: '',
+          username: '',
+          phone: '',
+          email: '',
+          wxNo: '',
+          department: '',
         },
         rules: {
-          pass: [
+          username: [
             { validator: validatePass, trigger: 'blur' }
           ],
-          checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
-          ],
-          oldPass: [
+          jobNo: [
             { validator: checkOldPass, trigger: 'blur' }
-          ]
+          ],
         }
       };
+    },
+    mounted(){
+      this.ruleForm.jobNo = sessionStorage.jobNo;
+      this.ruleForm.username = sessionStorage.username;
+      this.ruleForm.phone = sessionStorage.tel;
+      this.ruleForm.email = sessionStorage.email;
+      this.ruleForm.wxNo = sessionStorage.weixin;
+      this.ruleForm.department = sessionStorage.department;
     },
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             httpServer({
-                url: '/user/changePassword'
-              }, {
-                jobNo: localStorage.username,
-                password: this.ruleForm.oldPass,
-                newPassword: this.ruleForm.pass
-              })
+              url: '/user/changePassword'
+            }, {
+              jobNo: localStorage.username,
+              password: this.ruleForm.oldPass,
+              newPassword: this.ruleForm.pass
+            })
               .then((res) => {
                 // if() {
-                  localStorage.removeItem('username');
-                  this.$router.push('/login');
-               // }
+                localStorage.removeItem('username');
+                this.$router.push('/login');
+                // }
               })
           } else {
-            console.log('error submit!!');
-            return false;
+
           }
         });
       },
@@ -121,9 +116,9 @@ export default {
 </script>
 
 <style lang="css">
-.changePass {
-  width: 60%;
-  margin: 0 auto;
-  margin-top: 50px;
-}
+  .changePass {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
 </style>

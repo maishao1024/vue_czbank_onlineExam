@@ -184,7 +184,6 @@ export default {
         this.hour = hour < 10 ? '0' + hour : hour;
         this.min = min  < 10 ? '0' + min : min;
         this.sec = sec  < 10 ? '0' + sec : sec;
-
         if(this.hour==0 && this.min==0 && this.sec==0) {
           window.clearInterval(this.timer);
           this.submitPaper();

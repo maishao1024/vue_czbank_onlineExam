@@ -1,4 +1,3 @@
-
 <template>
 <div class="login">
   <div class="login-content-wrap">
@@ -7,10 +6,10 @@
       <div class="login-from">
         <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="50px" class="demo-ruleForm" size="mini">
           <el-form-item label="学号" prop="name">
-            <el-input type="text" v-model="ruleForm2.name" auto-complete="off" placeholder="lqw"></el-input>
+            <el-input type="text" v-model="ruleForm2.name" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
-            <el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="123456"></el-input>
+            <el-input type="password" v-model="ruleForm2.password" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('ruleForm2')">登录</el-button>
@@ -71,12 +70,22 @@ export default {
             .then((res) => {
               var data = res.data;
               if(data.success == true) {
-              localStorage.username = data.data[0].jobNo;
-              this.$router.push('/main/homepage');
+                sessionStorage.jobNo = data.data[0].jobNo;
+                sessionStorage.username = data.data[0].username;
+                sessionStorage.tel = data.data[0].phone;
+                sessionStorage.email = data.data[0].email;
+                sessionStorage.weixin = data.data[0].qq;
+                sessionStorage.department = data.data[0].description;
+                this.$router.push('/main/homepage');
+              }else {
+                this.$message({
+                  type: 'info',
+                  message: data.message,
+                });
               }
             })
         } else {
-          console.log('error submit!!');
+
           return false;
         }
       });
