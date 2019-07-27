@@ -111,6 +111,10 @@ export default {
 </script>
 
 <style lang="css">
+.top-bar {
+  height: 50px;
+  background-image: url('../../assets/images/login-bg-small.jpg');
+}
 .left-menu {
   position: absolute;
   width: 200px;
