@@ -80,10 +80,10 @@
     },
     mounted(){
       this.ruleForm.jobNo = sessionStorage.jobNo;
-      this.ruleForm.username = sessionStorage.username;
+      this.ruleForm.username = sessionStorage.userName;
       this.ruleForm.phone = sessionStorage.tel;
       this.ruleForm.email = sessionStorage.email;
-      this.ruleForm.wxNo = sessionStorage.weixin;
+      this.ruleForm.wxNo = sessionStorage.wxNo;
       this.ruleForm.department = sessionStorage.department;
     },
     methods: {
@@ -91,17 +91,36 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             httpServer({
-              url: '/user/changePassword'
+              url: '/user/updateInfo'
             }, {
-              jobNo: localStorage.username,
-              password: this.ruleForm.oldPass,
-              newPassword: this.ruleForm.pass
+              id: sessionStorage.id,
+              jobNo: this.ruleForm.jobNo,
+              userName: this.ruleForm.username,
+              email: this.ruleForm.email,
+              wxNo: this.ruleForm.wxNo,
+              phone: this.ruleForm.phone,
+              department: this.ruleForm.department,
             })
               .then((res) => {
-                // if() {
-                localStorage.removeItem('username');
-                this.$router.push('/login');
+                if (res.data.success == true){
+                  sessionStorage.jobNo = this.ruleForm.jobNo;
+                  sessionStorage.userName = this.ruleForm.username;
+                  sessionStorage.tel = this.ruleForm.phone;
+                  sessionStorage.email = this.ruleForm.email;
+                  sessionStorage.wxNo = this.ruleForm.wxNo;
+                  sessionStorage.department = this.ruleForm.department;
+                this.$message({
+                  type: 'success',
+                  message: '添加成功',
+                });
+                this.$router.push('/main/homepage');
                 // }
+              }else {
+                  this.$message({
+                    type: 'info',
+                    message: res.data.resMsg,
+                  });
+                }
               })
           } else {
 

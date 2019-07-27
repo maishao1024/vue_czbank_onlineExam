@@ -190,12 +190,9 @@ export default {
         }
 
       },1000);
-
       this.questionId = parseInt(this.$route.params.questionId)+1;//当前题号
       this.currentQuestion = this.questionList[this.$route.params.questionId];
-
       this.questionType = parseInt(this.currentQuestion.questionType);
-
       if(typeof this.currentQuestion.answer != 'undefined') {
         this.setAnswer(this.questionType,this.currentQuestion.answer);
       }
@@ -236,7 +233,6 @@ export default {
               }
               break;
           }
-
       }
 
       httpServer({
@@ -303,7 +299,7 @@ export default {
       if(this.questionList.length-1 == questionId) {
         Message.success({
           showClose: true,
-          message: "这是最后一题啦",
+          message: "已经最后一题",
           type: 'success'
         });
         return;
@@ -331,7 +327,6 @@ export default {
     }
   },
   created(){
-    //提示用户是否离开此页面（关闭、刷新或者点击后退等）
     window.addEventListener("beforeunload", ()=> {
       sessionStorage.questions = JSON.stringify(this.questionList);
     });
@@ -345,57 +340,6 @@ export default {
       })
       .then((res)=>{
         let respData = res.data;
-        // let respData = {
-        //   "respCode": "1",
-        //   "instId" : 26,
-        //   "startTime" : "2018-02-05 14:33:20",
-        //   "endTime" : "2018-02-05 21:00:00",
-        //   "questions": [{
-        //     "questionstem": "1111dsafdas",
-        //     "choice": ["dafdsafa"],
-        //     "questionType": 2
-        //   }, {
-        //     "questionstem": "22222打发斯蒂芬打算发大水",
-        //     "choice": ["fdsfd","dfsdfsd","5532g3fgfgf"],
-        //     "questionType": 2
-        //   }, {
-        //     "questionstem": "333333打发斯蒂芬打算发大水",
-        //     "choice": ["dsfsdfdsfdfdfdfdfds","fffffffffffffffffffffffffff"],
-        //     "questionType": 2
-        //   }, {
-        //     "questionstem": "444444dfjaslkfjalksdjflkasjti题干？",
-        //     "questionType": 1
-        //   }, {
-        //     "questionstem": "5555的飞洒发斯蒂芬啊大丰收sad",
-        //     "questionType": 1
-        //   }, {
-        //     "questionstem": "666666请选择正确的答案。。。。。。。。",
-        //     "choice": ["aaaaaaa", "bbbbbbbbbbbb", "cccccccccc", "ddddddddddddddddd"],
-        //     "questionType": 3
-        //   },{
-        //     "questionstem": "7777请选择正确的答案。。。。。。。。",
-        //     "choice": ["aaaaaaa", "fffgdfgdfg", "cccccccccc", "ddddddddddddddddd","ddddddddddddddddd","ddddddddddddddddd"],
-        //     "questionType": 3
-        //   },{
-        //     "questionstem": "8888的飞洒发斯蒂芬啊大丰收sad",
-        //     "questionType": 4
-        //   }, {
-        //     "questionstem": "999999dfjaslkfjalksdjflkasjti题干？",
-        //     "questionType": 4
-        //   }, {
-        //     "questionstem": "10的飞洒发斯蒂芬啊大丰收sad",
-        //     "questionType": 5
-        //   }, {
-        //     "questionstem": "11的飞洒发斯蒂芬啊大丰收sad",
-        //     "questionType": 5
-        //   }, {
-        //     "questionstem": "12dfjaslkfjalksdjflkasjti题干？",
-        //     "questionType": 6
-        //   }, {
-        //     "questionstem": "13的飞洒发斯蒂芬啊大丰收sad",
-        //     "questionType": 6
-        //   }],
-        // }
         this.questionList = respData.questions;
         this.startTime = respData.startTime;
         this.endTime = respData.endTime;

@@ -1,11 +1,15 @@
 <template lang="html">
   <div class="main">
     <div class="left-menu">
-      <img class="logo" src="../../assets/images/logo.jpg" />
+      <img class="logo" src="../../assets/images/czlogo.jpg" />
       <el-menu
         @select="selectItem"
         default-active="2"
         class="el-menu-vertical-demo">
+        <el-menu-item index="checkin" >
+          <i class="el-icon-check"></i>
+          <span slot="title">在线签到</span>
+        </el-menu-item>
         <el-menu-item index="examOnline" >
           <i class="el-icon-edit-outline"></i>
           <span slot="title">在线考试</span>
@@ -16,7 +20,8 @@
             <span>个人中心</span>
           </template>
           <el-menu-item index="changePass">修改密码</el-menu-item>
-          <el-menu-item index="informationView">信息维护</el-menu-item>
+          <el-menu-item index="informationView">我的信息</el-menu-item>
+          <el-menu-item index="achievementView">我的成绩</el-menu-item>
         </el-submenu>
       </el-menu>
     </div>
@@ -48,6 +53,9 @@ export default {
       userName: ''
     }
   },
+  mounted(){
+    this.userName = sessionStorage.jobNo;
+  },
   methods: {
     handleCommand(command) {
       if (command == 'exit') {
@@ -57,6 +65,10 @@ export default {
         this.$router.push('/main/personalCenter/changePass');
       }else if (command == 'information') {
         this.$router.push('/main/information/informationView');
+      }else if (command == 'achievement') {
+        this.$router.push('/main/achievement/achievementView');
+      }else if (command == 'checkin'){
+        this.$router.push('/main/checkin/checkin');
       }
     },
     selectItem(i) {
@@ -89,13 +101,13 @@ export default {
         this.$router.push('/main/personalCenter/changePass');
       }else if (i == 'informationView'){
         this.$router.push('/main/information/informationView');
-      }
+      }else if (i == 'achievementView'){
+        this.$router.push('/main/achievement/achievementView');
+      }else if (i == 'checkin'){
+        this.$router.push('/main/checkin/checkin');
     }
-  },
-  created() {
-    this.userName = sessionStorage.jobNo;
   }
-}
+}}
 </script>
 
 <style lang="css">

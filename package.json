@@ -13,6 +13,7 @@
     "axios": "^0.17.1",
     "element-ui": "^2.1.0",
     "vue": "^2.5.2",
+    "vue-clock2": "^1.1.5",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

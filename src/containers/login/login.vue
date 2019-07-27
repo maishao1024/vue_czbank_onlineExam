@@ -4,8 +4,8 @@
     <div class="login-content">
       <img class="logo" src="../../assets/images/logo.jpg" />
       <div class="login-from">
-        <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="50px" class="demo-ruleForm" size="mini">
-          <el-form-item label="学号" prop="name">
+        <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="40px" class="demo-ruleForm">
+          <el-form-item label="工号" prop="name">
             <el-input type="text" v-model="ruleForm2.name" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
@@ -70,12 +70,13 @@ export default {
             .then((res) => {
               var data = res.data;
               if(data.success == true) {
+                sessionStorage.id = data.data[0].id;
                 sessionStorage.jobNo = data.data[0].jobNo;
-                sessionStorage.username = data.data[0].username;
+                sessionStorage.userName = data.data[0].username;
                 sessionStorage.tel = data.data[0].phone;
                 sessionStorage.email = data.data[0].email;
-                sessionStorage.weixin = data.data[0].qq;
-                sessionStorage.department = data.data[0].description;
+                sessionStorage.wxNo = data.data[0].wxno;
+                sessionStorage.department = data.data[0].department;
                 this.$router.push('/main/homepage');
               }else {
                 this.$message({
@@ -111,10 +112,10 @@ export default {
 
 .login .login-content-wrap {
   position: absolute;
-  width: 460px;
+  width: 420px;
   height: 100%;
-  min-height: 580px;
-  background: rgba(255, 255, 255, .4);
+  min-height: 500px;
+  background: rgba(255, 255, 205, .4);
   top: 0;
   right: 0;
 }
@@ -145,6 +146,6 @@ export default {
 .login .login-from {
   width: 80%;
   margin: 0 auto;
-  margin-top: 50px
+  margin-top: 60px
 }
 </style>
