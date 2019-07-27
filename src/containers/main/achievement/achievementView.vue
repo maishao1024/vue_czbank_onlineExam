@@ -1,43 +1,43 @@
 <template>
   <div>
-  <el-table
-    :data="tableData"
-    style="width: 100%">
-    <el-table-column
-      label="考试时间"
-      prop="startTime">
-    </el-table-column>
-    <el-table-column
-      label="考试名称"
-      prop="examTitle">
-    </el-table-column>
-    <el-table-column
-      label="姓名"
-      prop="userName">
-    </el-table-column>
-    <el-table-column
-      label="得分"
-      prop="totalScore">
-    </el-table-column>
-    <el-table-column
-      label="交卷时间"
-      prop="handPaperTime">
-    </el-table-column>
-    <el-table-column>
-      <template slot="header" slot-scope="scope">
-        <el-input
-          v-model="search"
-          size="mini"
-          placeholder="输入考试名称搜索"/>
-      </template>
-      <template slot-scope="scope">
-        <el-button
-          size="mini"
-          type="primary"
-          @click="handleEdit(scope.$index, scope.row)">查看</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+    <el-table
+      :data="tableData"
+      style="width: 100%">
+      <el-table-column
+        label="考试时间"
+        prop="startTime">
+      </el-table-column>
+      <el-table-column
+        label="考试名称"
+        prop="examTitle">
+      </el-table-column>
+      <el-table-column
+        label="姓名"
+        prop="userName">
+      </el-table-column>
+      <el-table-column
+        label="得分"
+        prop="totalScore">
+      </el-table-column>
+      <el-table-column
+        label="交卷时间"
+        prop="handPaperTime">
+      </el-table-column>
+      <el-table-column>
+        <template slot="header" slot-scope="scope">
+          <el-input
+            v-model="search"
+            size="mini"
+            placeholder="输入考试名称搜索"/>
+        </template>
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="primary"
+            @click="handleEdit(scope.$index, scope.row)">查看</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
     <!--<el-pagination-->
       <!--@size-change="handleSizeChange"-->
       <!--@current-change="handleCurrentChange"-->

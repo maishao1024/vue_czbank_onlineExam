@@ -1,20 +1,17 @@
-.<template lang="html">
-
+<template lang="html">
   <div class="checkin" >
-
-
-<div style = "margin-left: 40%">
-  <clock id="qiu-clock"></clock>
-</div>
-    <div class="text" style="text-align:center">
-      <h3>欢迎使用本系统签到，当前时间是{{date | formatDate}}</h3>
-      <h3>每日签到时间为<font color="red">06:00——08:00</font></h3>
+    <div style = "margin-left: 40%">
+      <clock id="qiu-clock"></clock>
     </div>
-<!--<div style = "margin-left: 42.7%" id="app">-->
-    <!--{{date | formatDate}}-->
-<!--</div>-->
-<div align="center">
-  <img src="../../../assets/images/timg.png" onclick="sign()" style="cursor: pointer;"/>
+        <div class="text" style="text-align:center">
+          <h3>欢迎使用本系统签到，当前时间是{{date | formatDate}}</h3>
+          <h3>每日签到时间为<font color="red">06:00——08:00</font></h3>
+        </div>
+    <!--<div style = "margin-left: 42.7%" id="app">-->
+        <!--{{date | formatDate}}-->
+    <!--</div>-->
+    <div align="center">
+    <img src="../../../assets/images/timg.png" onclick="sign()" style="cursor: pointer;"/>
     </div>
   </div>
 </template>
@@ -75,6 +72,12 @@ button.style.backgroundColor="gray";
 }
 }
 </script>
+
+<style scoped>
+.checkin {
+  background-image: url('../../../assets/images/login-bg-small.jpg');
+}
+</style>
 
 <style lang="css">
 #qiu-clock {
