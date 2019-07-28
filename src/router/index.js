@@ -8,6 +8,7 @@ import information from '@/containers/main/information/informationView'
 import examCard from '@/containers/main/examCard/index'
 import achievement from '@/containers/main/achievement/achievementView'
 import checkin from '@/containers/main/checkin/checkin'
+import question from '@/containers/main/question/question'
 Vue.use(Router)
 
 export default new Router({
@@ -48,6 +49,10 @@ export default new Router({
           path: 'checkin/checkin',
           name: 'checkin',
           component: checkin,
+        },{
+          path: 'question/question',
+          name: 'question',
+          component: question,
         }
       ]
     }

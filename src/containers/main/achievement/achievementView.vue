@@ -28,7 +28,7 @@
         <el-input
           v-model="search"
           size="mini"
-          placeholder="输入考试名称搜索"/>
+          placeholder="输入考试名称搜索" @keyup.enter.native="onSubmit" clearable/>
       </template>
       <template slot-scope="scope">
         <el-button
@@ -70,10 +70,6 @@
         .then((res) => {
           if (res.data.success == true){
             this.tableData = res.data.data;
-            this.$message({
-              type: 'success',
-              message: '添加成功',
-            });
            } else {
             this.$message({
               type: 'info',
@@ -86,6 +82,25 @@
       handleEdit(index, row) {
         console.log(index, row);
       },
+      onSubmit(){
+        httpServer({
+          url: '/user/myExam'
+        }, {
+          id: sessionStorage.id,
+          username: sessionStorage.userName,
+          title: this.search,
+        })
+          .then((res) => {
+            if (res.data.success == true){
+              this.tableData = res.data.data;
+            } else {
+              this.$message({
+                type: 'info',
+                message: res.data.resMsg,
+              });
+            }
+          })
+      }
     },
   }
 </script>

@@ -14,7 +14,7 @@
     <!--{{date | formatDate}}-->
 <!--</div>-->
 <div align="center">
-  <img src="../../../assets/images/timg.png" onclick="sign()" style="cursor: pointer;"/>
+  <img src="../../../assets/images/timg.png" @click="sign" style="cursor: pointer;"/>
     </div>
   </div>
 </template>
@@ -23,7 +23,6 @@
 import Clock from 'vue-clock2';
 import httpServer from '@/components/httpServer/httpServer.js'
 
-// import moment from 'moment'
 import {formatDate} from '@/date.js';
 import ElImage from "element-ui/packages/image/src/main";
 
@@ -44,34 +43,39 @@ export default {
   },
   mounted() {
     this.timer = setInterval(() => {
-      this.date = new Date(); // 修改数据date
+      this.date = new Date();
     }, 1000)
   },
   beforeDestroy() {
     if (this.timer) {
-      clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
+      clearInterval(this.timer);
     }
   },
-  sign() {
-    alert("1");
-    this.$message({
-      type: 'success',
-      message: '签到成功'
-    });
-  },
-
   methods: {
   checkin(){
-     this.$message({
-  type: 'success',
-  message: '签到成功'
-});
-button.disabled=true;
-button.style.backgroundColor="gray";
+    button.disabled=true;
+    button.style.backgroundColor="gray";
   },
-  clockStyle(){
-
-  }
+  sign() {
+    httpServer({
+      url: '/user/sign'
+    }, {
+      id: sessionStorage.id,
+    })
+      .then((res) => {
+        if (res.data.success == true){
+          this.$message({
+            type: 'success',
+            message: '签到成功',
+          });
+        } else {
+          this.$message({
+            type: 'info',
+            message: res.data.resMsg,
+          });
+        }
+      });
+  },
 }
 }
 </script>

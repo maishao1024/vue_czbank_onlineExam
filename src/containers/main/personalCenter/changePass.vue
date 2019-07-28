@@ -2,13 +2,19 @@
   <div class="changePass">
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="原密码" prop="oldPass">
-        <el-input type="password" v-model="ruleForm.oldPass" clearable></el-input>
+        <el-col :span="10">
+          <el-input type="password" v-model="ruleForm.oldPass" clearable></el-input>
+        </el-col>
       </el-form-item>
       <el-form-item label="密码" prop="pass">
-        <el-input type="password" v-model="ruleForm.pass" auto-complete="off" clearable></el-input>
+        <el-col :span="10">
+          <el-input type="password" v-model="ruleForm.pass" auto-complete="off" clearable></el-input>
+        </el-col>
       </el-form-item>
       <el-form-item label="确认密码" prop="checkPass">
-        <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" clearable></el-input>
+        <el-col :span="10">
+          <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" clearable></el-input>
+        </el-col>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>

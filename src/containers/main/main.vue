@@ -23,6 +23,21 @@
           <el-menu-item index="informationView">我的信息</el-menu-item>
           <el-menu-item index="achievementView">我的成绩</el-menu-item>
         </el-submenu>
+        <el-submenu index="3">
+          <template slot="title">
+            <i class="el-icon-star-off"></i>
+            <span>试题管理</span>
+          </template>
+          <el-menu-item index="question">试题上传</el-menu-item>
+        </el-submenu>
+        <el-menu-item index="examOnline" >
+          <i class="el-icon-edit-outline"></i>
+          <span slot="title">考试管理</span>
+        </el-menu-item>
+        <el-menu-item index="examOnline" >
+          <i class="el-icon-edit-outline"></i>
+          <span slot="title">用户管理</span>
+        </el-menu-item>
       </el-menu>
     </div>
     <div class="right-box">
@@ -67,8 +82,10 @@ export default {
         this.$router.push('/main/information/informationView');
       }else if (command == 'achievement') {
         this.$router.push('/main/achievement/achievementView');
-      }else if (command == 'checkin'){
+      }else if (command == 'question'){
         this.$router.push('/main/checkin/checkin');
+      }else if (command == 'question'){
+        this.$router.push('/main/question/question');
       }
     },
     selectItem(i) {
@@ -80,11 +97,6 @@ export default {
           })
           .then((res) => {
             let respData = res.data;
-            // let respData = {
-            //   "respCode": "1",
-            //   "paperId": 38,
-            //   "instId" : 26,
-            // }
             sessionStorage.startTime = res.data.startTime;
             sessionStorage.endTime = res.data.endTime;
             sessionStorage.questions = JSON.stringify(res.data.questions);
@@ -105,7 +117,9 @@ export default {
         this.$router.push('/main/achievement/achievementView');
       }else if (i == 'checkin'){
         this.$router.push('/main/checkin/checkin');
-    }
+      }else if (i == 'question') {
+        this.$router.push('/main/question/question');
+      }
   }
 }}
 </script>

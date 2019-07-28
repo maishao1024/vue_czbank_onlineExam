@@ -313,9 +313,6 @@ export default {
       {
         case 1://填空
         case 5://简答
-        case 6://程序
-          this.textarea = answer;
-          break;
         case 2://选择
         case 4://判断
           this.radio = answer;
@@ -333,7 +330,7 @@ export default {
     if(typeof sessionStorage.questions == "undefined") {
       alert("wuwuwu");
       httpServer({
-        url : '/exam/get_question',
+        url : '/question/questions',
       },{
         paperId : this.$route.params.paperId,
         instId : sessionStorage.instId,
