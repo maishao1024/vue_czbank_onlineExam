@@ -116,6 +116,7 @@ export default {
     return{
       dialogVisible: false,
       currentQuestion : {},
+      questionNo: [],
       questionList : [],
       questionType : 1,
       textarea : '',
@@ -205,13 +206,12 @@ export default {
     submitPaper(){
       window.onblur = null;
       this.saveAnswer(false);
-      let answer = {};
-      for(let i=0;i<this.questionList.length;i++) {
-          switch(this.questionList[i].questionType)
+      let answer = [];
+      for(let i = 0;i<this.questionList.length;i++) {
+        switch(this.questionList[i].questionType)
           {
             case 1://填空
             case 5:
-            case 6:
               answer[i] = this.questionList[i].answer;
               break;
             case 2://选择
@@ -234,14 +234,15 @@ export default {
               break;
           }
       }
-
       httpServer({
-        url : '/exam/submit_paper'
+        url : '/paper/submit'
       },{
-        instId : this.instId,
-        answer :answer
+        paperId : this.instId,
+        answer : answer.join('%&'),
+        questionNo : sessionStorage.questionNo
       })
       .then((res)=>{
+        sessionStorage.questionNo = "";
         if(res.data.respCode == '1') {
           this.$router.push(`/main/homepage`);
         }
@@ -328,7 +329,6 @@ export default {
       sessionStorage.questions = JSON.stringify(this.questionList);
     });
     if(typeof sessionStorage.questions == "undefined") {
-      alert("wuwuwu");
       httpServer({
         url : '/question/questions',
       },{

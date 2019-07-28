@@ -25,7 +25,7 @@
         </el-submenu>
         <el-submenu index="3">
           <template slot="title">
-            <i class="el-icon-star-off"></i>
+            <i class="el-icon-s-order"></i>
             <span>试题管理</span>
           </template>
           <el-menu-item index="question">试题上传</el-menu-item>
@@ -34,8 +34,8 @@
           <i class="el-icon-edit-outline"></i>
           <span slot="title">考试管理</span>
         </el-menu-item>
-        <el-menu-item index="examOnline" >
-          <i class="el-icon-edit-outline"></i>
+        <el-menu-item index="StudentManagement">
+          <i class="el-icon-view"> </i>
           <span slot="title">用户管理</span>
         </el-menu-item>
       </el-menu>
@@ -86,6 +86,8 @@ export default {
         this.$router.push('/main/checkin/checkin');
       }else if (command == 'question'){
         this.$router.push('/main/question/question');
+      }else if (command == 'StudentManagement'){
+        this.$router.push('/main/UserManagement/StudentManagement');
       }
     },
     selectItem(i) {
@@ -99,6 +101,9 @@ export default {
             let respData = res.data;
             sessionStorage.startTime = res.data.startTime;
             sessionStorage.endTime = res.data.endTime;
+            for(var i = 0;i < res.data.questions.length; i ++){
+              sessionStorage.questionNo = sessionStorage.questionNo + res.data.questions[i].questionNo + "&";
+            }
             sessionStorage.questions = JSON.stringify(res.data.questions);
             sessionStorage.instId = res.data.instId;
             if(res.data.respCode == '1') {
@@ -119,6 +124,8 @@ export default {
         this.$router.push('/main/checkin/checkin');
       }else if (i == 'question') {
         this.$router.push('/main/question/question');
+      }else if(i == 'StudentManagement'){
+        this.$router.push('/main/UserManagement/StudentManagement');
       }
   }
 }}

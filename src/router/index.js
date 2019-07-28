@@ -9,6 +9,8 @@ import examCard from '@/containers/main/examCard/index'
 import achievement from '@/containers/main/achievement/achievementView'
 import checkin from '@/containers/main/checkin/checkin'
 import question from '@/containers/main/question/question'
+import UserManagement from '@/containers/main/UserManagement/StudentManagement'
+
 Vue.use(Router)
 
 export default new Router({
@@ -53,6 +55,11 @@ export default new Router({
           path: 'question/question',
           name: 'question',
           component: question,
+        },
+        {
+          path:'UserManagement/StudentManagement',
+          name:'StudentManagement',
+          component:UserManagement,
         }
       ]
     }
