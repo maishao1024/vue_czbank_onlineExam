@@ -34,7 +34,11 @@
           <i class="el-icon-edit-outline"></i>
           <span slot="title">考试管理</span>
         </el-menu-item>
-        <el-menu-item index="StudentManagement">
+        <el-menu-item index="showGrade" >
+          <i class="el-icon-trophy"></i>
+          <span slot="title">成绩管理</span>
+        </el-menu-item>
+        <el-menu-item index="userManagement">
           <i class="el-icon-view"> </i>
           <span slot="title">用户管理</span>
         </el-menu-item>
@@ -82,12 +86,14 @@ export default {
         this.$router.push('/main/information/informationView');
       }else if (command == 'achievement') {
         this.$router.push('/main/achievement/achievementView');
-      }else if (command == 'question'){
+      }else if (command == 'checkin'){
         this.$router.push('/main/checkin/checkin');
       }else if (command == 'question'){
         this.$router.push('/main/question/question');
-      }else if (command == 'StudentManagement'){
+      }else if (command == 'userManagement'){
         this.$router.push('/main/UserManagement/StudentManagement');
+      }else if (command == 'showGrade'){
+        this.$router.push('/main/showGrade/showGrade');
       }
     },
     selectItem(i) {
@@ -124,8 +130,10 @@ export default {
         this.$router.push('/main/checkin/checkin');
       }else if (i == 'question') {
         this.$router.push('/main/question/question');
-      }else if(i == 'StudentManagement'){
+      }else if(i == 'userManagement'){
         this.$router.push('/main/UserManagement/StudentManagement');
+      }else if(i == 'showGrade'){
+        this.$router.push('/main/showGrade/showGrade');
       }
   }
 }}

@@ -10,7 +10,7 @@ import achievement from '@/containers/main/achievement/achievementView'
 import checkin from '@/containers/main/checkin/checkin'
 import question from '@/containers/main/question/question'
 import UserManagement from '@/containers/main/UserManagement/StudentManagement'
-
+import showGrade from '@/containers/main/showGrade/showGrade'
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +60,11 @@ export default new Router({
           path:'UserManagement/StudentManagement',
           name:'StudentManagement',
           component:UserManagement,
+        },
+        {
+          path:'showGrade/showGrade',
+          name:'showGrade',
+          component:showGrade,
         }
       ]
     }

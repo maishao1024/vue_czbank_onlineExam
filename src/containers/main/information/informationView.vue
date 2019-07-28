@@ -79,6 +79,18 @@
       };
     },
     mounted(){
+      if (sessionStorage.tel == 'null'){
+        sessionStorage.tel = '';
+      }
+      if (sessionStorage.email == 'null'){
+        sessionStorage.email = '';
+      }
+      if (sessionStorage.wxNo == 'null'){
+        sessionStorage.wxNo = '';
+      }
+      if (sessionStorage.department == 'null'){
+        sessionStorage.department = '';
+      }
       this.ruleForm.jobNo = sessionStorage.jobNo;
       this.ruleForm.username = sessionStorage.userName;
       this.ruleForm.phone = sessionStorage.tel;

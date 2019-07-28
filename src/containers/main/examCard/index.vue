@@ -239,14 +239,20 @@ export default {
       },{
         paperId : this.instId,
         answer : answer.join('%&'),
-        questionNo : sessionStorage.questionNo
+        questionNo : sessionStorage.questionNo,
+        id : sessionStorage.id
       })
       .then((res)=>{
         sessionStorage.questionNo = "";
-        if(res.data.respCode == '1') {
+        if(res.data.success == true) {
+          this.$message({
+            type: 'success',
+            message: '交卷成功',
+          });
           this.$router.push(`/main/homepage`);
         }
-      })
+      });
+      sessionStorage.questionNo = "";
     },
     clickAnswerCard(index){
       this.saveAnswer(false);

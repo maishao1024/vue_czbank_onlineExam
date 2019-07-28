@@ -71,7 +71,7 @@ export default {
         } else {
           this.$message({
             type: 'info',
-            message: res.data.resMsg,
+            message: '失败',
           });
         }
       });
