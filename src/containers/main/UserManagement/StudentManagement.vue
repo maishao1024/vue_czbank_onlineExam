@@ -2,13 +2,13 @@
   <div class="userManagement">
       <el-form :inline="true" model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="工号">
-          <el-input v-model="ruleForm.id" placeholder="工号" clearable></el-input>
+          <el-input v-model="ruleForm.id" clearable></el-input>
         </el-form-item>
         <el-form-item label="姓名">
-          <el-input v-model="ruleForm.name" placeholder="姓名" clearable></el-input>
+          <el-input v-model="ruleForm.name" clearable></el-input>
         </el-form-item>
         <el-form-item label="部门">
-          <el-input v-model="ruleForm.department" placeholder="部门" clearable></el-input>
+          <el-input v-model="ruleForm.department" clearable></el-input>
         </el-form-item>
        <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">查询</el-button>

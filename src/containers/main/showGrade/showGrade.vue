@@ -2,13 +2,13 @@
   <div class="userManagement">
     <el-form :inline="true" model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="工号">
-        <el-input v-model="ruleForm.id" placeholder="工号" clearable></el-input>
+        <el-input v-model="ruleForm.id" clearable></el-input>
       </el-form-item>
       <el-form-item label="姓名">
-        <el-input v-model="ruleForm.name" placeholder="姓名" clearable></el-input>
+        <el-input v-model="ruleForm.name" clearable></el-input>
       </el-form-item>
       <el-form-item label="考试">
-        <el-input v-model="ruleForm.department" placeholder="部门" clearable></el-input>
+        <el-input v-model="ruleForm.department" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">查询</el-button>
@@ -35,12 +35,6 @@
           prop = "department"
           label= "成绩"
         ></el-table-column>
-        <el-table-column
-          prop = "Options"
-          label= "操作"
-        ><template slot-scope="scope">
-          <el-button type="danger" @click="deleteUser(scope.row)">删除</el-button>
-        </template></el-table-column>
       </el-table>
     </div>
     <footer id="id_footer">
@@ -66,11 +60,6 @@
         pagesize: 10,
         userList: {},
         dialogStatus: "",
-        textMap: {
-          update: "Edit",
-          create: "Create"
-        },
-        dialogFormVisible: false,
         ruleForm: {
           id: '',
           email: "",
@@ -84,7 +73,7 @@
     },
     mounted() {
       httpServer({
-        url: '/user/userList'
+        url: '/achievement/getAchievements'
       }, {
       })
         .then((res) => {
@@ -102,11 +91,11 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             httpServer({
-              url: '/user/userList'
+              url: '/achievement/getAchievements'
             }, {
               jobNo: this.ruleForm.id,
               userName: this.ruleForm.name,
-              department: this.ruleForm.department
+              achievement: this.ruleForm.department
             })
               .then((res) => {
                 this.userList = res.data.data;
@@ -127,53 +116,6 @@
         this.userList.email = row.email;
         this.userList.department = row.department;
       },
-      updateData: function() {
-        this.$refs.editForm.validate(valid => {
-          if (valid) {
-            this.$confirm("确认提交吗？", "提示", {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',})
-              .then(({ value }) => {
-                this.$message({
-                  type: 'success',
-                  message: '修改成功 '
-                });
-              }).catch(() => {
-              this.$message({
-                type: 'info',
-                message: '取消输入'
-              });
-            });
-          }
-        });
-      },
-      deleteUser(row) {
-        this.$confirm('此操作将删除用户信息, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
-          center: true
-        }).then(() => {
-          httpServer({
-            url: '/user/delete'
-          }, {
-            jobNo: row.id
-          })
-            .then((res) => {
-              this.userList = res.data.data;
-              this.$message({
-                type: 'success',
-                message: '删除成功!'
-              });
-            })
-        })
-          .catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消删除'
-            });
-          });
-      }
     }
   }
 </script>
