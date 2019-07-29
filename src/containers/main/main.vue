@@ -30,13 +30,17 @@
           </template>
           <el-menu-item index="question">试题上传</el-menu-item>
         </el-submenu>
-        <el-menu-item index="examOnline" >
-          <i class="el-icon-edit-outline"></i>
+        <el-menu-item index="examManage" >
+          <i class="el-icon-notebook-2"></i>
           <span slot="title">考试管理</span>
         </el-menu-item>
         <el-menu-item index="showGrade" >
           <i class="el-icon-trophy"></i>
           <span slot="title">成绩管理</span>
+        </el-menu-item>
+        <el-menu-item index="showChart" >
+          <i class="el-icon-trophy"></i>
+          <span slot="title">图标展示</span>
         </el-menu-item>
         <el-menu-item index="userManagement">
           <i class="el-icon-view"> </i>
@@ -94,6 +98,10 @@ export default {
         this.$router.push('/main/UserManagement/StudentManagement');
       }else if (command == 'showGrade'){
         this.$router.push('/main/showGrade/showGrade');
+      }else if (command == 'examManage'){
+        this.$router.push('/main/examManage/examManagement');
+      }else if (command == 'showChart'){
+        this.$router.push('/main/achievement/showChart');
       }
     },
     selectItem(i) {
@@ -134,6 +142,10 @@ export default {
         this.$router.push('/main/UserManagement/StudentManagement');
       }else if(i == 'showGrade'){
         this.$router.push('/main/showGrade/showGrade');
+      }else if(i == 'examManage'){
+        this.$router.push('/main/examManage/examManagement');
+      }else if(i == 'showChart'){
+        this.$router.push('/main/achievement/showChart');
       }
   }
 }}

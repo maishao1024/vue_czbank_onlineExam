@@ -33,19 +33,10 @@
       <template slot-scope="scope">
         <el-button
           size="mini"
-          type="primary"
-          @click="handleEdit(scope.$index, scope.row)">查看</el-button>
+          type="primary" @click="handleEdit(scope.$index, scope.row)">查看</el-button>
       </template>
     </el-table-column>
   </el-table>
-    <!--<el-pagination-->
-      <!--@size-change="handleSizeChange"-->
-      <!--@current-change="handleCurrentChange"-->
-      <!--:current-page.sync="currentPage3"-->
-      <!--:page-size="10"-->
-      <!--layout="prev, pager, next, jumper"-->
-      <!--:total="1000">-->
-    <!--</el-pagination>-->
   </div>
 
 </template>
