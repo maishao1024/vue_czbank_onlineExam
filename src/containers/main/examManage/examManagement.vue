@@ -30,7 +30,7 @@
           <el-button
             size="mini"
             type="primary"
-            @click="handleEdit(scope.$index, scope.row)" :disabled="scope.row.state == '待考' ? false: true">设置</el-button>
+            @click="handleEdit(scope.$index, scope.row)" >设置</el-button>
           <el-button
             size="mini"
             type="danger"

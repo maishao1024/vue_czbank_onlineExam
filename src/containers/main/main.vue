@@ -1,20 +1,20 @@
 <template lang="html">
   <div class="main">
     <div class="left-menu">
-      <img class="logo" src="../../assets/images/czlogo.jpg" />
+      <img class="logo" src="../../assets/images/czlogo_new.png" />
       <el-menu
         @select="selectItem"
         default-active="2"
         class="el-menu-vertical-demo">
-        <el-menu-item index="checkin" >
+        <el-menu-item index="checkin" v-show="level == '1'">
           <i class="el-icon-check"></i>
           <span slot="title">在线签到</span>
         </el-menu-item>
-        <el-menu-item index="examOnline" >
+        <el-menu-item index="examOnline" v-show="level == '1'">
           <i class="el-icon-edit-outline"></i>
           <span slot="title">在线考试</span>
         </el-menu-item>
-        <el-submenu index="2">
+        <el-submenu index="2" v-show="level == '1'">
           <template slot="title">
             <i class="el-icon-star-off"></i>
             <span>个人中心</span>
@@ -23,26 +23,26 @@
           <el-menu-item index="informationView">我的信息</el-menu-item>
           <el-menu-item index="achievementView">我的成绩</el-menu-item>
         </el-submenu>
-        <el-submenu index="3">
+        <el-submenu index="3" v-show="level == '0'">
           <template slot="title">
             <i class="el-icon-s-order"></i>
             <span>试题管理</span>
           </template>
           <el-menu-item index="question">试题上传</el-menu-item>
         </el-submenu>
-        <el-menu-item index="examManage" >
+        <el-menu-item index="examManage" v-show="level == '0'">
           <i class="el-icon-notebook-2"></i>
           <span slot="title">考试管理</span>
         </el-menu-item>
-        <el-menu-item index="showGrade" >
+        <el-menu-item index="showGrade" v-show="level == '0'">
           <i class="el-icon-trophy"></i>
           <span slot="title">成绩管理</span>
         </el-menu-item>
-        <el-menu-item index="showChart" >
+        <el-menu-item index="showChart" v-show="level == '0'">
           <i class="el-icon-trophy"></i>
           <span slot="title">图标展示</span>
         </el-menu-item>
-        <el-menu-item index="userManagement">
+        <el-menu-item index="userManagement" v-show="level == '0'">
           <i class="el-icon-view"> </i>
           <span slot="title">用户管理</span>
         </el-menu-item>
@@ -50,6 +50,7 @@
     </div>
     <div class="right-box">
       <div class="top-bar clearfix">
+        <h  style="color:white;margin-left:300px">欢迎使用本系统，当前时间是{{date | formatDate}}</h>
         <el-dropdown class="f-r" @command="handleCommand">
           <el-button type="text" class="user-menu">
             <i class="el-icon-star-off"></i>
@@ -69,15 +70,32 @@
 
 <script>
 import httpServer from '@/components/httpServer/httpServer.js'
+import {formatDate} from '@/date.js';
 
 export default {
+  filters:{
+    formatDate(time){
+      let date = new Date(time);
+      return formatDate(date, 'yyyy/MM/dd hh:mm:ss');
+    }
+  },
   data() {
     return {
-      userName: ''
+      userName: '',
+      date: new Date(),
+      level: sessionStorage.getItem('level'),
     }
   },
   mounted(){
     this.userName = sessionStorage.jobNo;
+    this.timer = setInterval(() => {
+      this.date = new Date(); // 修改数据date
+    }, 1000)
+  },
+  beforeDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
+    }
   },
   methods: {
     handleCommand(command) {
@@ -152,6 +170,18 @@ export default {
 </script>
 
 <style lang="css">
+  .total
+  {
+    background-image: url('../../assets/images/login-bg-small.jpg');
+  }
+  .top-bar {
+    height: 50px;
+    background-image: url('../../assets/images/banner0.png');
+
+    background-size: cover;
+
+  }
+
 .left-menu {
   position: absolute;
   width: 200px;

@@ -1,9 +1,6 @@
 <template lang="html">
   <div class="showChart" >
     <div class="chart-wrap">
-      <!-- <div id="chart1" style="height: 500px"></div>
-      <div id="chart2" style="height: 300px"></div> -->
-
       <div id="chart1" style="height: 500px"></div>
       <div id="chart2" style="height: 500px"></div>
     </div>
@@ -39,7 +36,7 @@ export default {
 
   mounted() {
   this.initEchart1();
-  this.initEchart2();
+  // this.initEchart2();
   window.onresize = this.echartResize;
   },
 
@@ -48,7 +45,6 @@ export default {
   },
   methods: {
     echartResize() {
-    console.log(333);
     this.echart1.resize();
     this.echart2.resize();
     },
@@ -74,7 +70,7 @@ export default {
         }
       },
       legend: {
-        data:['蒸发量','降水量','平均温度']
+        data:['人数']
       },
       xAxis: [
         {
@@ -88,7 +84,7 @@ export default {
       yAxis: [
         {
             type: 'value',
-            name: '水量',
+            name: '',
             min: 0,
             max: 250,
             interval: 50,
@@ -124,7 +120,7 @@ export default {
             yAxisIndex: 1,
             data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
       }
-      ] 
+      ]
 
       };
       mychart.setOption(option);
@@ -134,7 +130,7 @@ export default {
 
     initEchart2() {
       let mychart = echarts.init(document.getElementById("chart2"));
-      
+
       let option = {
     backgroundColor: '#2c343c',
 
@@ -206,7 +202,7 @@ export default {
             }
         }
     ]
-}; 
+};
 
 mychart.setOption(option);
 this.echart = mychart

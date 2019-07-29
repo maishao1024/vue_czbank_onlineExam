@@ -1,4 +1,5 @@
 <template lang="html">
+  <div class="specific">
   <div class="changePass">
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="原密码" prop="oldPass">
@@ -21,6 +22,7 @@
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
+  </div>
   </div>
 </template>
 
@@ -104,10 +106,16 @@ export default {
   }
 </script>
 
-<style lang="css">
+<style lang="css" scope>
+  .specific{
+    background-image: url('../../../assets/images/background_checkin.jpg');
+    background-size:cover;
+    height: 500px;
+  }
 .changePass {
-  width: 60%;
-  margin: 0 auto;
-  margin-top: 50px;
+  width: 420px;
+  /* margin: 0 auto; */
+  padding-top: 100px;
+  padding-left:520px;
 }
 </style>

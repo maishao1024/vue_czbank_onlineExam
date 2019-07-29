@@ -180,14 +180,14 @@ export default {
     },
     methods: {
       submitForm(formName) {
-        if (this.value == '1' && this.ruleForm.radio == ''){
+        if (this.value == '2' && this.ruleForm.radio == ''){
           this.$message({
             type: 'info',
             message: '请选择正确答案',
           });
           return;
         }
-        if (this.value == '2' && this.ruleForm.checkBox == ''){
+        if (this.value == '3' && this.ruleForm.checkBox == ''){
           this.$message({
             type: 'info',
             message: '请选择正确答案',
@@ -222,10 +222,11 @@ export default {
                 score: this.ruleForm.score
             })
               .then((res) => {
-                // if() {
+                this.$message({
+                  type: 'success',
+                  message: '题目增加成功 '
+                });
                   sessionStorage.removeItem('username');
-
-               // }
               })
           } else {
             return false;

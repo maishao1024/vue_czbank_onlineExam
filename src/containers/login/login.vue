@@ -1,10 +1,12 @@
 <template>
   <div class="login">
+    <h1 style="color:white;margin-left:250px;margin-top:200px">欢迎进入在线签考系统</h1>
+    <p style="color:white;margin-left:250px;margin-top:200px">&emsp;&emsp;————签不到考不过有限公司出品</p >
     <div class="login-content-wrap">
       <div class="login-content">
         <img class="logo" src="../../assets/images/logo.jpg" />
         <div class="login-from">
-          <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="50px" class="demo-ruleForm" size="mini">
+          <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="40px" class="demo-ruleForm">
             <el-form-item label="工号" prop="name">
               <el-input type="text" v-model="ruleForm2.name" auto-complete="off" placeholder="lqw"></el-input>
             </el-form-item>
@@ -86,9 +88,6 @@
       };
 
     },
-    created() {
-      this.handleUserList()
-    },
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
@@ -109,6 +108,7 @@
                   sessionStorage.email = data.data[0].email;
                   sessionStorage.wxNo = data.data[0].wxno;
                   sessionStorage.department = data.data[0].department;
+                  sessionStorage.level = data.data[0].level;
                   this.$router.push('/main/homepage');
                 }
               })
@@ -174,7 +174,7 @@
 
   .login .login-content-wrap {
     position: absolute;
-    width: 460px;
+    width: 420px;
     height: 100%;
     min-height: 580px;
     background: rgba(255, 255, 255, .4);
@@ -199,10 +199,6 @@
     display: block;
     margin: 0 auto;
     margin-top: 50px
-  }
-
-  .login .login-form-button {
-    width: 100%;
   }
 
   .login .login-from {
