@@ -61,13 +61,6 @@
           <el-input v-model="ruleForm.fillIn" auto-complete="off" clearable></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="解析" prop="analysis">
-        <el-col :span="10">
-          <el-input type="textarea"
-                    :autosize="{ minRows: 2, maxRows: 4}"
-                    v-model="ruleForm.analysis" clearable></el-input>
-        </el-col>
-      </el-form-item>
       <el-form-item label="分值" prop="score">
         <el-col :span="3">
           <el-input v-model="ruleForm.score" auto-complete="off" clearable></el-input>
@@ -78,6 +71,10 @@
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
+      <uploader :options="option" class="uploader-example">
+        <uploader-unsupport></uploader-unsupport>
+        <uploader-btn>上传</uploader-btn>
+      </uploader>
   </div>
 </template>
 
@@ -153,8 +150,11 @@ export default {
           radio: '',
           checkBox: [],
           fillIn:'',
-          analysis:'',
-          score: ''
+          score: '',
+        },option: {
+          target: 'http://localhost:8081/question/uploadFile',
+          autoStart: false,
+          testChunks: false,
         },
         rules: {
           description: [
@@ -218,7 +218,6 @@ export default {
                 radio: this.ruleForm.radio,
                 checkBox: this.ruleForm.checkBox.join("-"),
                 fillIn: this.ruleForm.fillIn,
-                analysis: this.ruleForm.analysis,
                 score: this.ruleForm.score
             })
               .then((res) => {
@@ -235,8 +234,9 @@ export default {
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
-      }
-    }
+      },
+
+    },
   }
 </script>
 
@@ -245,5 +245,23 @@ export default {
   width: 60%;
   margin: 0 auto;
   margin-top: 50px;
+}
+.uploader-example {
+  width: auto;
+  padding: 0px;
+  font-size: 20px;
+}
+.uploader-example .uploader-btn {
+  border: 0px;
+  padding-top: 12px;
+  padding-right: 20px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  margin-right: 4px;
+  float: right;
 }
 </style>
